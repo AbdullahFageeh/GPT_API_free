@@ -33,6 +33,10 @@ func newClient() *openai.Client {
 
 // Non-stream response
 func gpt35API(ctx context.Context, client *openai.Client, messages []openai.ChatCompletionMessage) error {
+    if len(messages) == 0 {
+        return errors.New("messages cannot be empty")
+    }
+
     req := openai.ChatCompletionRequest{
         Model:    openai.GPT3Dot5Turbo,
         Messages: messages,
