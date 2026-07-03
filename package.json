@@ -1,0 +1,29 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "<div align=\"center\"> <img src=\"./images/logo.png\" alt=\"icon\" width=\"50px\"/> <h1 align=\"center\">GPT-API-free / DeepSeek-API-free</h1>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbdullahFageeh/GPT_API_free.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/AbdullahFageeh/GPT_API_free/issues"
+  },
+  "homepage": "https://github.com/AbdullahFageeh/GPT_API_free#readme",
+  "devDependencies": {
+    "@jest/globals": "^30.4.1",
+    "jest-mock": "^30.4.1",
+    "vitest": "^4.1.9"
+  },
+  "dependencies": {
+    "openai": "^6.45.0"
+  }
+}

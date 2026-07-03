@@ -15,7 +15,7 @@ const client = new OpenAI({
 });
 
 // Non-stream response
-async function gpt35Api(messages) {
+export async function gpt35Api(messages) {
   const completion = await client.chat.completions.create({
     model: "gpt-3.5-turbo",
     messages,
@@ -25,7 +25,7 @@ async function gpt35Api(messages) {
 }
 
 // Stream response
-async function gpt35ApiStream(messages) {
+export async function gpt35ApiStream(messages) {
   const stream = await client.chat.completions.create({
     model: "gpt-3.5-turbo",
     messages,
@@ -34,21 +34,23 @@ async function gpt35ApiStream(messages) {
 
   for await (const chunk of stream) {
     const delta = chunk.choices?.[0]?.delta?.content;
-    if (delta) {
+    if (delta !== undefined && delta !== null) {
       process.stdout.write(delta);
     }
   }
   process.stdout.write("\n");
 }
 
-(async () => {
-  const messages = [
-    { role: "user", content: "What is the relationship between Lu Xun and Zhou Shuren?" },
-  ];
+if (process.env.NODE_ENV !== 'test') {
+  (async () => {
+    const messages = [
+      { role: "user", content: "What is the relationship between Lu Xun and Zhou Shuren?" },
+    ];
 
-  // Non-stream call
-  // await gpt35Api(messages);
+    // Non-stream call
+    // await gpt35Api(messages);
 
-  // Stream call
-  await gpt35ApiStream(messages);
-})();
+    // Stream call
+    await gpt35ApiStream(messages);
+  })();
+}
