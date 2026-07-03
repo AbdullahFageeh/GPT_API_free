@@ -30,8 +30,9 @@ def gpt_35_api_stream(messages: list):
         stream=True,
     )
     for chunk in stream:
-        if chunk.choices[0].delta.content is not None:
-            print(chunk.choices[0].delta.content, end="")
+        content = chunk.choices[0].delta.content
+        if content is not None:
+            print(content, end="")
 
 if __name__ == '__main__':
     messages = [{'role': 'user','content': '鲁迅和周树人的关系'},]
