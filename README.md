@@ -313,6 +313,14 @@
 - 转发API无法直接向官方接口api.openai.com发起请求，需要将请求地址改为api.chatanywhere.tech才可以使用，大部分插件和软件都可以修改。
 - 遇到问题可以前往[ChatAnywhere Status](https://status.chatanywhere.tech/)查看接口可用性。
 
+## 代码示例
+本项目在 `demo/` 目录下提供了多种语言的调用示例：
+- `demo/demo_python.py`: Python 调用示例 (gpt-3.5-turbo)
+- `demo/demo_gpt4o_mini.py`: Python 调用示例 (gpt-4o-mini)
+- `demo/demo_nodejs.js`: Node.js 调用示例
+- `demo/demo_go.go`: Go 调用示例
+- `demo/DemoJava.java`: Java 调用示例
+
 ## 常见软件使用方法
 
 [文档-常用软件使用教程](https://chatanywhere.apifox.cn/doc-5547696)
