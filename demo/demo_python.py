@@ -15,8 +15,11 @@ def gpt_35_api(messages: list):
     Args:
         messages (list): 完整的对话消息
     """
-    completion = client.chat.completions.create(model="gpt-3.5-turbo", messages=messages)
-    print(completion.choices[0].message.content)
+    try:
+        completion = client.chat.completions.create(model="gpt-3.5-turbo", messages=messages)
+        print(completion.choices[0].message.content)
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 def gpt_35_api_stream(messages: list):
     """为提供的对话消息创建新的回答 (流式传输)
