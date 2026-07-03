@@ -59,9 +59,6 @@ public class DemoJava {
     public static void main(String[] args) {
         String prompt = "What is the relationship between Lu Xun and Zhou Shuren?";
 
-        // Non-stream call
-        // gpt35Api(prompt);
-
         // Stream call
         gpt35ApiStream(prompt);
     }
