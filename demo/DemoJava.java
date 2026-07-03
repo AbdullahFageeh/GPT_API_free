@@ -17,8 +17,12 @@ import com.openai.models.ChatModel;
 import com.openai.models.chat.completions.ChatCompletion;
 import com.openai.models.chat.completions.ChatCompletionChunk;
 import com.openai.models.chat.completions.ChatCompletionCreateParams;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class DemoJava {
+    private static final Map<String, String> cache = new ConcurrentHashMap<>();
+
     private static final OpenAIClient client = OpenAIOkHttpClient.builder()
             .apiKey(System.getenv().getOrDefault("OPENAI_API_KEY", "YOUR API KEY"))
             .baseUrl("https://api.chatanywhere.tech/v1")
@@ -26,6 +30,11 @@ public class DemoJava {
 
     // Non-stream response
     public static void gpt35Api(String userText) {
+        if (cache.containsKey(userText)) {
+            System.out.println(cache.get(userText));
+            return;
+        }
+
         ChatCompletionCreateParams params = ChatCompletionCreateParams.builder()
                 .model(ChatModel.GPT_3_5_TURBO)
                 .addUserMessage(userText)
@@ -33,6 +42,8 @@ public class DemoJava {
 
         ChatCompletion completion = client.chat().completions().create(params);
         String content = completion.choices().get(0).message().content().orElse("");
+
+        cache.put(userText, content);
         System.out.println(content);
     }
 
