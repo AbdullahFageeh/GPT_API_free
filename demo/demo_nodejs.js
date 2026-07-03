@@ -14,14 +14,24 @@ const client = new OpenAI({
   baseURL: "https://api.chatanywhere.tech/v1",
 });
 
+const cache = new Map();
+
 // Non-stream response
 async function gpt35Api(messages) {
+  const cacheKey = JSON.stringify(messages);
+  if (cache.has(cacheKey)) {
+    console.log(cache.get(cacheKey));
+    return;
+  }
+
   const completion = await client.chat.completions.create({
     model: "gpt-3.5-turbo",
     messages,
   });
 
-  console.log(completion.choices[0]?.message?.content || "");
+  const content = completion.choices[0]?.message?.content || "";
+  cache.set(cacheKey, content);
+  console.log(content);
 }
 
 // Stream response
