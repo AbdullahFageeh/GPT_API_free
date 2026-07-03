@@ -1,5 +1,6 @@
 from openai import OpenAI
 import os
+import sys
 
 client = OpenAI(
     # defaults to os.environ.get("OPENAI_API_KEY")
@@ -30,8 +31,11 @@ def gpt_4o_mini_api_stream(messages: list):
         stream=True,
     )
     for chunk in stream:
-        if chunk.choices[0].delta.content is not None:
-            print(chunk.choices[0].delta.content, end="")
+        # Performance optimization: cache content in local variable to avoid redundant attribute/index lookups
+        content = chunk.choices[0].delta.content
+        if content is not None:
+            # Performance optimization: use sys.stdout.write for faster output than print()
+            sys.stdout.write(content)
     print()
 
 if __name__ == '__main__':
