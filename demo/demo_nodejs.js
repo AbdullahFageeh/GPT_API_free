@@ -35,7 +35,9 @@ async function gpt35ApiStream(messages) {
   for await (const chunk of stream) {
     const delta = chunk.choices?.[0]?.delta?.content;
     if (delta) {
-      process.stdout.write(delta);
+      if (!process.stdout.write(delta)) {
+        await new Promise(resolve => process.stdout.once("drain", resolve));
+      }
     }
   }
   process.stdout.write("\n");
