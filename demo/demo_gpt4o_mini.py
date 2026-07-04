@@ -29,9 +29,15 @@ def gpt_4o_mini_api_stream(messages: list):
         messages=messages,
         stream=True,
     )
+    import sys
+    # ⚡ Bolt: Optimize by caching sys.stdout.write and reducing attribute lookups
+    write = sys.stdout.write
     for chunk in stream:
-        if chunk.choices[0].delta.content is not None:
-            print(chunk.choices[0].delta.content, end="")
+        choice = chunk.choices[0]
+        content = choice.delta.content
+        if content is not None:
+            write(content)
+    sys.stdout.flush()
     print()
 
 if __name__ == '__main__':
