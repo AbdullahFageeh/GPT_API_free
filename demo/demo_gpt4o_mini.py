@@ -1,5 +1,6 @@
-from openai import OpenAI
+import sys
 import os
+from openai import OpenAI
 
 client = OpenAI(
     # defaults to os.environ.get("OPENAI_API_KEY")
@@ -29,10 +30,14 @@ def gpt_4o_mini_api_stream(messages: list):
         messages=messages,
         stream=True,
     )
+    # Using sys.stdout.write and localizing lookups for performance
+    write = sys.stdout.write
     for chunk in stream:
-        if chunk.choices[0].delta.content is not None:
-            print(chunk.choices[0].delta.content, end="")
-    print()
+        content = chunk.choices[0].delta.content
+        if content is not None:
+            write(content)
+    write("\n")
+    sys.stdout.flush()
 
 if __name__ == '__main__':
     messages = [{'role': 'user','content': '你好，请介绍一下你自己。'},]
