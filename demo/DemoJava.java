@@ -17,6 +17,7 @@ import com.openai.models.ChatModel;
 import com.openai.models.chat.completions.ChatCompletion;
 import com.openai.models.chat.completions.ChatCompletionChunk;
 import com.openai.models.chat.completions.ChatCompletionCreateParams;
+import java.io.PrintStream;
 
 public class DemoJava {
     private static final OpenAIClient client = OpenAIOkHttpClient.builder()
@@ -43,16 +44,18 @@ public class DemoJava {
                 .addUserMessage(userText)
                 .build();
 
+        // Caching System.out to a local variable for slightly better performance in the loop
+        PrintStream out = System.out;
         try (StreamResponse<ChatCompletionChunk> stream = client.chat().completions().createStreaming(params)) {
             stream.stream().forEach(chunk -> {
                 if (!chunk.choices().isEmpty()) {
                     String delta = chunk.choices().get(0).delta().content().orElse("");
                     if (!delta.isEmpty()) {
-                        System.out.print(delta);
+                        out.print(delta);
                     }
                 }
             });
-            System.out.println();
+            out.println();
         }
     }
 
