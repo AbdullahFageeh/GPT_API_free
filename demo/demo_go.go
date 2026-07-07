@@ -92,11 +92,6 @@ func main() {
         },
     }
 
-    // Non-stream call
-    // if err := gpt35API(ctx, client, messages); err != nil {
-    //     log.Fatal(err)
-    // }
-
     // Stream call
     if err := gpt35APIStream(ctx, client, messages); err != nil {
         log.Fatal(err)
