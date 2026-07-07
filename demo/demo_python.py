@@ -41,7 +41,5 @@ def gpt_35_api_stream(messages: list):
 
 if __name__ == '__main__':
     messages = [{'role': 'user','content': '鲁迅和周树人的关系'},]
-    # 非流式调用
-    # gpt_35_api(messages)
     # 流式调用
     gpt_35_api_stream(messages)
