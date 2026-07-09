@@ -32,13 +32,15 @@ async function gpt35ApiStream(messages) {
     stream: true,
   });
 
+  // Using process.stdout.write and localizing lookups for performance
+  const write = process.stdout.write.bind(process.stdout);
   for await (const chunk of stream) {
-    const delta = chunk.choices?.[0]?.delta?.content;
-    if (delta) {
-      process.stdout.write(delta);
+    const content = chunk.choices?.[0]?.delta?.content;
+    if (content) {
+      write(content);
     }
   }
-  process.stdout.write("\n");
+  write("\n");
 }
 
 (async () => {
