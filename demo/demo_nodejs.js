@@ -32,13 +32,17 @@ async function gpt35ApiStream(messages) {
     stream: true,
   });
 
+  // Caching process.stdout.write and localizing lookups for performance.
+  // This reduces the overhead of property lookups and method binding in the hot loop.
+  const write = process.stdout.write.bind(process.stdout);
   for await (const chunk of stream) {
-    const delta = chunk.choices?.[0]?.delta?.content;
+    const choice = chunk.choices?.[0];
+    const delta = choice?.delta?.content;
     if (delta) {
-      process.stdout.write(delta);
+      write(delta);
     }
   }
-  process.stdout.write("\n");
+  write("\n");
 }
 
 (async () => {

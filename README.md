@@ -1,5 +1,5 @@
 <div align="center">
-<img src="./images/logo.png" alt="icon" width="50px"/>
+<img src="./images/logo.png" alt="icon" width="50px" decoding="async"/>
 <h1 align="center">GPT-API-free / DeepSeek-API-free</h1>
 
 免费使用 gpt-5 | deepseek
@@ -12,12 +12,12 @@
 
 [QQ群: 1080471642](https://qm.qq.com/cgi-bin/qm/qr?k=UK3uy_oIge2Hu5s6MYMiFKMm4FMYY6pX&jump_from=webapi&authKey=u7UzKKipRVI6UiMGdKVepJ9SIqbKwKxuUKlgOJoDS3urEnCpDG+WYrHG4VcXS0Ey)
 
-[![](https://status.chatanywhere.org/api/badge/6/uptime/24?labelPrefix=GPT:)](https://status.chatanywhere.tech/)
-[![](https://status.chatanywhere.org/api/badge/10/uptime/24?labelPrefix=GPT-CA系列:)](https://status.chatanywhere.tech/)
+<a href="https://status.chatanywhere.tech/"><img src="https://status.chatanywhere.org/api/badge/6/uptime/24?labelPrefix=GPT:" decoding="async"></a>
+<a href="https://status.chatanywhere.tech/"><img src="https://status.chatanywhere.org/api/badge/10/uptime/24?labelPrefix=GPT-CA系列:" decoding="async"></a>
 
-[![](https://status.chatanywhere.org/api/badge/8/uptime/24?labelPrefix=Claude:)](https://status.chatanywhere.tech/)
-[![](https://status.chatanywhere.org/api/badge/3/uptime/24?labelPrefix=Gemini:)](https://status.chatanywhere.tech/)
-[![](https://status.chatanywhere.org/api/badge/4/uptime/24?labelPrefix=Deepseek:)](https://status.chatanywhere.tech/)
+<a href="https://status.chatanywhere.tech/"><img src="https://status.chatanywhere.org/api/badge/8/uptime/24?labelPrefix=Claude:" decoding="async"></a>
+<a href="https://status.chatanywhere.tech/"><img src="https://status.chatanywhere.org/api/badge/3/uptime/24?labelPrefix=Gemini:" decoding="async"></a>
+<a href="https://status.chatanywhere.tech/"><img src="https://status.chatanywhere.org/api/badge/4/uptime/24?labelPrefix=Deepseek:" decoding="async"></a>
 
 
 </div>
@@ -230,8 +230,8 @@
 
 [2] 多模态模型图片如何计算占用tokens请参考OpenAI官方 https://openai.com/api/pricing 。分辨率越高，tokens占用越多，但最高不会超过1445tokens。
 以下以1000x150分辨率的图片为例，计算图片占用Tokens数为425。
-<img src="https://api.apifox.cn/api/v1/projects/2946232/resources/442830/image-preview" width="400"/>
-注意gpt-4o-mini的图片价格并没有降低，与gpt-4o一致。因为mini的token价格为4o的33分之一，所以你应该会看到图片的token计算是4o的33倍，具体参考openai官方的价格页面https://openai.com/api/pricing/
+<img src="https://api.apifox.cn/api/v1/projects/2946232/resources/442830/image-preview" width="400" decoding="async" loading="lazy"/>
+注意gpt-4o-mini的图片价格并没有降低，与gpt-4o一致。因为mini的token价格为4o的33分之一，所以你应该会看到图片的token计算是4o的 33倍，具体参考openai官方的价格页面https://openai.com/api/pricing/
 
 [3] CA系列多模态模型在计算图片价格时，如果使用流式传输(参数stream=true)，则按照0.10115每张图计费；如果使用非流式传输（参数stream=false），这时按照OpenAI返回的实际消耗量计费，如果你的图片分辨率较低，通常低于0.10115。因此，我们建议在使用gpt-4-turbo分析图片时，使用非流式传输（参数stream=false）。
 
@@ -367,4 +367,6 @@
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=chatanywhere/GPT_API_free&type=Date)](https://www.star-history.com/#chatanywhere/GPT_API_free&Date)
+<a href="https://www.star-history.com/#chatanywhere/GPT_API_free&Date">
+  <img src="https://api.star-history.com/svg?repos=chatanywhere/GPT_API_free&type=Date" alt="Star History Chart" decoding="async" loading="lazy">
+</a>
