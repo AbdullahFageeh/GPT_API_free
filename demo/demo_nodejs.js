@@ -32,13 +32,15 @@ async function gpt35ApiStream(messages) {
     stream: true,
   });
 
+  // Optimization: Cache stdout.write to reduce property lookup overhead in the hot loop
+  const write = process.stdout.write.bind(process.stdout);
   for await (const chunk of stream) {
     const delta = chunk.choices?.[0]?.delta?.content;
     if (delta) {
-      process.stdout.write(delta);
+      write(delta);
     }
   }
-  process.stdout.write("\n");
+  write("\n");
 }
 
 (async () => {
