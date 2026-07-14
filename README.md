@@ -1,5 +1,5 @@
 <div align="center">
-<img src="./images/logo.png" alt="icon" width="50px"/>
+<img src="./images/logo.png" alt="icon" width="50px" decoding="async" loading="lazy"/>
 <h1 align="center">GPT-API-free / DeepSeek-API-free</h1>
 
 免费使用 gpt-5 | deepseek
