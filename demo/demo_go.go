@@ -73,7 +73,11 @@ func gpt35APIStream(ctx context.Context, client *openai.Client, messages []opena
         }
 
         if len(response.Choices) > 0 {
-            fmt.Print(response.Choices[0].Delta.Content)
+            // Using os.Stdout.WriteString to avoid reflection and interface{} boxing overhead
+            content := response.Choices[0].Delta.Content
+            if content != "" {
+                os.Stdout.WriteString(content)
+            }
         }
     }
 
