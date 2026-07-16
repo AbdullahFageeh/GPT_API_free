@@ -63,6 +63,9 @@ func gpt35APIStream(ctx context.Context, client *openai.Client, messages []opena
     }
     defer stream.Close()
 
+    // Localizing os.Stdout and using WriteString to avoid fmt.Print's
+    // reflection and interface{} boxing overhead in the hot loop.
+    out := os.Stdout
     for {
         response, err := stream.Recv()
         if errors.Is(err, io.EOF) {
@@ -73,7 +76,7 @@ func gpt35APIStream(ctx context.Context, client *openai.Client, messages []opena
         }
 
         if len(response.Choices) > 0 {
-            fmt.Print(response.Choices[0].Delta.Content)
+            out.WriteString(response.Choices[0].Delta.Content)
         }
     }
 
