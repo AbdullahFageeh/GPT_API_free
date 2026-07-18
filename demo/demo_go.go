@@ -63,6 +63,9 @@ func gpt35APIStream(ctx context.Context, client *openai.Client, messages []opena
     }
     defer stream.Close()
 
+    // Localize os.Stdout to a local variable to avoid repeating package-level lookups
+    stdout := os.Stdout
+
     for {
         response, err := stream.Recv()
         if errors.Is(err, io.EOF) {
@@ -73,7 +76,8 @@ func gpt35APIStream(ctx context.Context, client *openai.Client, messages []opena
         }
 
         if len(response.Choices) > 0 {
-            fmt.Print(response.Choices[0].Delta.Content)
+            // Using stdout.WriteString avoids reflection and interface{} boxing overhead on every token iteration
+            stdout.WriteString(response.Choices[0].Delta.Content)
         }
     }
 
