@@ -24,12 +24,16 @@ public class DemoJava {
             .baseUrl("https://api.chatanywhere.tech/v1")
             .build();
 
-    // Non-stream response
-    public static void gpt35Api(String userText) {
-        ChatCompletionCreateParams params = ChatCompletionCreateParams.builder()
+    private static ChatCompletionCreateParams buildParams(String userText) {
+        return ChatCompletionCreateParams.builder()
                 .model(ChatModel.GPT_3_5_TURBO)
                 .addUserMessage(userText)
                 .build();
+    }
+
+    // Non-stream response
+    public static void gpt35Api(String userText) {
+        ChatCompletionCreateParams params = buildParams(userText);
 
         ChatCompletion completion = client.chat().completions().create(params);
         String content = completion.choices().get(0).message().content().orElse("");
@@ -38,10 +42,7 @@ public class DemoJava {
 
     // Stream response
     public static void gpt35ApiStream(String userText) {
-        ChatCompletionCreateParams params = ChatCompletionCreateParams.builder()
-                .model(ChatModel.GPT_3_5_TURBO)
-                .addUserMessage(userText)
-                .build();
+        ChatCompletionCreateParams params = buildParams(userText);
 
         try (StreamResponse<ChatCompletionChunk> stream = client.chat().completions().createStreaming(params)) {
             stream.stream().forEach(chunk -> {
