@@ -46,9 +46,6 @@ async function gpt35ApiStream(messages) {
     { role: "user", content: "What is the relationship between Lu Xun and Zhou Shuren?" },
   ];
 
-  // Non-stream call
-  // await gpt35Api(messages);
-
   // Stream call
   await gpt35ApiStream(messages);
 })();
